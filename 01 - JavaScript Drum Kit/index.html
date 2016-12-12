@@ -58,24 +58,24 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-
-
   function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    if (!audio) return; // stop the function from running all together
-    audio.currentTime = 0; // rewind to the start
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+    if(!audio) return; //if no audio element return
+    audio.currentTime = 0; //rewind to start so everytime you hit button it plays
     audio.play();
     key.classList.add('playing');
   }
-  function removeTransition(e) {
-    if (e.propertyName !== 'transform') return; // skip it if it's not a transform
-    this.classList.remove('playing');
+
+  function removeTransition(e){
+    if(e.propertyName !== 'transform') return; //use transform because it takes the longest
+    this.classList.remove('playing'); //remove playing class to make it go back to normal
   }
 
   const keys = document.querySelectorAll('.key');
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
+
+  window.addEventListener('keydown', playSound); //when keydown then play sound
 
 </script>
 
